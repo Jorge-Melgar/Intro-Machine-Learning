@@ -32,7 +32,19 @@ plt.show()
 ### visualization code (prettyPicture) to show you the decision boundary
 
 
+from sklearn.ensemble import AdaBoostClassifier
+from time import time
 
+clf = AdaBoostClassifier()
+
+t0 = time()
+clf.fit(features_train, labels_train)
+print "training time:", round(time()-t0, 3), "s"
+
+t0 = time()
+clf.predict(features_test)
+print "predicting time:", round(time()-t0, 3), "s"
+print(clf.score(features_test,labels_test))
 
 
 
@@ -41,4 +53,5 @@ plt.show()
 try:
     prettyPicture(clf, features_test, labels_test)
 except NameError:
+    print "pass"
     pass
