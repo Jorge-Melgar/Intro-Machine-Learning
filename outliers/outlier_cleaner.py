@@ -1,3 +1,4 @@
+
 #!/usr/bin/python
 
 
@@ -10,11 +11,15 @@ def outlierCleaner(predictions, ages, net_worths):
         Return a list of tuples named cleaned_data where 
         each tuple is of the form (age, net_worth, error).
     """
-    
+    from numpy import array
+        
     cleaned_data = []
 
-    ### your code goes here
-
+    error = [(x-y)**2 for x,y in zip (predictions,net_worths)]
+    cleaned_data = zip (ages, net_worths, error)
+    cleaned_data.sort(key = lambda tup: tup[2])
     
-    return cleaned_data
-
+    for i in range(0, int(len(cleaned_data)*0.1)):
+        cleaned_data.pop()
+    
+    return (cleaned_data)
